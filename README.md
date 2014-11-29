@@ -25,3 +25,7 @@ _(Nothing yet)_
 ## License
 Copyright (c) 2014 goliatone  
 Licensed under the MIT license.
+
+## TODO:
+Integrate file finder stuff:
+https://www.npmjs.org/package/file-magic
