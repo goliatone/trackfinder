@@ -1,36 +1,19 @@
 'use strict';
 
-var trackfinder = require('../lib/trackfinder.js');
+var assert = require('chai').assert;
+var sinon = require('sinon');
+var path = require('path');
+var fixture = path.resolve.bind(path, __dirname, 'fixtures');
 
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
+var TrackFinder = require('..');
 
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+sinon.assert.expose(assert, { prefix: '' });
 
-exports['awesome'] = {
-  setUp: function(done) {
-    // setup here
-    done();
-  },
-  'no args': function(test) {
-    test.expect(1);
-    // tests here
-    test.equal(trackfinder.awesome(), 'awesome', 'should be awesome.');
-    test.done();
-  },
-};
+describe('TrackFinder', function(){
+
+    describe('constructor', function(){
+        it('should provide a DEFAULTS object', function(){
+            assert.isObject(TrackFinder.constructor.DEFAULTS);
+        });
+    });
+});
