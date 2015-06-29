@@ -1,13 +1,36 @@
 # trackfinder
 
-Express route finder
+Simple Express route finder
 
 ## Getting Started
 Install the module with: `npm install trackfinder`
 
 ```javascript
-var trackfinder = require('trackfinder');
-trackfinder.awesome(); // "awesome"
+var TrackFinder = require('trackfinder');
+
+var app = express();
+
+
+TrackFinder.register(app, {
+    path:'./routes',
+    config: config
+});
+```
+
+This will load all files inside the **routes** directory. The most simple route file would look like this:
+
+```js
+'use strict';
+
+module.exports = function(app, options){
+    console.log('- pets: register routes');
+
+    app.get('/pets', function(req, res){
+        res.json({
+            pets: ['Colonel Meow', 'Casper', 'Chase No Face', 'Cherry Pop']
+        });
+    });
+};
 ```
 
 ## Documentation
