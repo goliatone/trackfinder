@@ -26,14 +26,15 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt nodeunit"
+    "test": "./node_modules/mocha/bin/mocha test/*_test.js",
+    "dtest": "./node_modules/mocha/bin/mocha test/*_test.js -G -w --reporter spec --slow 500"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt": "~0.4.5",
-    "express": "^4.8.0"
+    "chai": "^2.2.0",
+    "express": "^4.13.0",
+    "mocha": "^2.2.4",
+    "mocha-sinon": "^1.1.4",
+    "sinon": "^1.14.1"
   },
   "keywords": [],
   "dependencies": {
