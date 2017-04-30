@@ -16,10 +16,8 @@ test('Correct users returned', (t) => {
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
-            let expectedUsers = Users;
-
             t.error(err, 'No error');
-            t.same(res.body, expectedUsers, 'Users as expected');
+            t.same(res.body, Users, 'Users as expected');
             t.end();
         });
 });
@@ -30,10 +28,8 @@ test('Correct pets returned', (t) => {
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
-            let expectedUsers = Pets;
-
             t.error(err, 'No error');
-            t.same(res.body, expectedUsers, 'Pets as expected');
+            t.same(res.body, Pets, 'Pets as expected');
             t.end();
         });
 });
@@ -44,7 +40,6 @@ test('Correct home returned', (t) => {
         .expect('Content-Type', /text/)
         .expect(200)
         .end((err, res) => {
-
             t.error(err, 'No error');
             t.same(res.text, Home, 'Home as expected');
             t.end();
