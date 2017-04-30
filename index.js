@@ -8,3 +8,4 @@
 'use strict';
 
 module.exports = require('./lib');
+module.exports.TrackFinder = require('./lib').TrackFinder;
