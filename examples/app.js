@@ -1,14 +1,14 @@
-var express = require('express');
-var tracks = require('../index');
+'use strict';
 
-var PORT = 3333;
-var app = express();
-app.set('port', PORT);
+const express = require('express');
+const TrackFinder = require('../index');
 
-tracks.register(app, {
-    path:'./examples/routes'
-});
+const app = express();
 
-app.listen(PORT, function(){
-    console.log('Express server running on', PORT);
+TrackFinder.register(app);
+
+var server = app.listen(3333, function(){
+    console.log('');
+    console.log('Express server running on:');
+    console.log(' http://localhost:%s', server.address().port);
 });
