@@ -39,8 +39,16 @@ test('TrackFinder should find route files in a directory', (t) => {
     t.end();
 });
 
-test('', (t) => {
-    let files = TrackFinder.find(('./test/fixtures/routes'));
-    t.equals(files.length, 2, 'Should find files');
+test('TrackFinder should register route files in a directory', (t) => {
+    let app = {
+        use: function(){}
+    };
+
+    let routers = TrackFinder.register(app, {
+        path: './test/fixtures/routes',
+        config: {}
+    });
+
+    t.equals(routers.length, 2, 'Should return a router per route file');
     t.end();
 });
