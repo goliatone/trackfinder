@@ -42,6 +42,7 @@
   },
   "keywords": [],
   "dependencies": {
-    "extend": "^1.3.0"
+    "extend": "^1.3.0",
+    "gextend": "^0.3.0"
   }
 }
