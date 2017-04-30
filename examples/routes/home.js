@@ -1,9 +1,13 @@
 'use strict';
 
-module.exports = function(app, options){
-    console.log('- home: register routes');
+let response = '<h3>Hello TrackFinder</h3>';
+
+module.exports = function(app, options) {
+    options.logger.info('- home: register routes');
 
     app.get('/', function(req, res){
-        res.status(200).send('<h3>Hello TrackFinder</h3>');
+        res.status(200).send(response);
     });
 };
+
+module.exports.response = response;
