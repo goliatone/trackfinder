@@ -1,7 +1,7 @@
 'use strict';
 const test = require('tape');
 const resolve = require('path').resolve;
-const TrackFinder = require('../lib/trackfinder');
+const TrackFinder = require('../lib');
 
 test('TrackFinder has DEFAULTS', (t) => {
     t.ok(TrackFinder.constructor.DEFAULTS, 'OK defaults.');
