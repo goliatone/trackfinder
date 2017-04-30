@@ -7,8 +7,7 @@ Route.priority = 10;
 Route.mountpath = '/api';
 
 Route.middleware = [
-    function(req, res, next){
-        console.log('Logger middleware');
+    function(req, res, next) {
         next();
     }
 ];
@@ -33,12 +32,12 @@ let _resources = {
 
 Route.routes = {
     'GET /:resource': function(req, res) {
-        res.json(_resources[req.params.resource]);
+        res.status(200).json(_resources[req.params.resource]);
     },
     'GET /:resource/:id(\\d+)': function(req, res) {
         let id = req.params.id;
         let resource = req.params.resource;
-        console.log('id %s, resource %s', id, resource);
+
         let resources = _resources[resource];
 
         resource = resources.find(function( obj ) {
@@ -66,3 +65,4 @@ Route.routes = {
 };
 
 module.exports = Route;
+module.exports.response = _resources;
