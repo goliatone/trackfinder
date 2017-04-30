@@ -9,13 +9,14 @@ test('TrackFinder has DEFAULTS', (t) => {
 });
 
 test('TrackFinder setOptions should merge DEFAULTS', (t)=>{
-    let options = {};
+
     let DEFAULTS = TrackFinder.constructor.DEFAULTS;
-    TrackFinder.setOptions(options);
+    let options = TrackFinder.setOptions();
 
     Object.keys(DEFAULTS).map((key)=>{
-        t.deepEquals(TrackFinder[key], DEFAULTS[key], `${key} should be equal`);
+        t.deepEquals(options[key], DEFAULTS[key], `${key} should be equal`);
     });
+
     t.end();
 });
 
