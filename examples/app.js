@@ -5,10 +5,19 @@ const TrackFinder = require('../index');
 
 const app = express();
 
-TrackFinder.register(app);
 
-var server = app.listen(3333, function(){
-    console.log('');
-    console.log('Express server running on:');
-    console.log(' http://localhost:%s', server.address().port);
+ let logger = isTest() ? require('noop-console')({}) : console;
+
+TrackFinder.register(app, {
+    path: __dirname + '/routes',
+    logger: logger,
+    config: {
+        logger: logger
+    }
 });
+
+module.exports = app;
+
+function isTest() {
+    return process.env.NODE_ENV === 'test';
+}
