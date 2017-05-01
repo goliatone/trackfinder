@@ -11,7 +11,7 @@ test('defaults are exposed in TrackFinder.DEFAULTS', (t)=>{
 
 test('TrackFinder should inherit defaults on constructor', (t) => {
     let tracker = new TrackFinder();
-    Object.keys(DEFAULTS).map((key)=>{
+    Object.keys(DEFAULTS).map((key) => {
         t.deepEquals(tracker[key], DEFAULTS[key], `${key} should be equal`);
     });
     t.end();
