@@ -1,5 +1,5 @@
 'use strict';
-const test = require('tape');
+const test = require('tape-catch');
 const resolve = require('path').resolve;
 const DEFAULTS = require('../lib/defaults');
 const TrackFinder = require('..').TrackFinder;

@@ -1,1 +1,1 @@
-throw new Error('This file should be ignored');
+// throw new Error('This file should be ignored');

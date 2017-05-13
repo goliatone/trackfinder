@@ -1,6 +1,6 @@
 'use strict';
 const fs = require('fs');
-const test = require('tape');
+const test = require('tape-catch');
 const TrackFinder = require('..').TrackFinder;
 
 test('TrackFinder addFileFilter should be stored in filters', (t) => {

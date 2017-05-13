@@ -1,5 +1,5 @@
 'use strict';
-const test = require('tape');
+const test = require('tape-catch');
 
 const utils = require('../lib/utils');
 const get = utils.get;
