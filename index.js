@@ -7,4 +7,5 @@
  */
 'use strict';
 
-module.exports = require('./lib/trackfinder');
+module.exports = require('./lib');
+module.exports.TrackFinder = require('./lib').TrackFinder;

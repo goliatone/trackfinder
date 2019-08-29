@@ -1,14 +1,23 @@
-var express = require('express');
-var tracks = require('../index');
+'use strict';
 
-var PORT = 3333;
-var app = express();
-app.set('port', PORT);
+const express = require('express');
+const TrackFinder = require('../index');
 
-tracks.register(app, {
-    path:'./examples/routes'
+const app = express();
+
+
+ let logger = isTest() ? require('noop-console')({}) : console;
+
+TrackFinder.register(app, {
+    path: __dirname + '/routes',
+    logger: logger,
+    config: {
+        logger: logger
+    }
 });
 
-app.listen(PORT, function(){
-    console.log('Express server running on', PORT);
-});
+module.exports = app;
+
+function isTest() {
+    return process.env.NODE_ENV === 'test';
+}

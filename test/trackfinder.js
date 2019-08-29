@@ -1,54 +1,84 @@
 'use strict';
-const test = require('tape');
-const resolve = require('path').resolve;
-const TrackFinder = require('../lib/trackfinder');
+const fs = require('fs');
+const test = require('tape-catch');
+const TrackFinder = require('..').TrackFinder;
 
-test('TrackFinder has DEFAULTS', (t) => {
-    t.ok(TrackFinder.constructor.DEFAULTS, 'OK defaults.');
+test('TrackFinder addFileFilter should be stored in filters', (t) => {
+
+    let tracker = new TrackFinder();
+    let test = function(){};
+
+    let expected = tracker.filters.concat([test]);
+    tracker.addFileFilter(test);
+    t.deepEquals(tracker.filters, expected);
     t.end();
 });
 
-test('TrackFinder setOptions should merge DEFAULTS', (t)=>{
-    let options = {};
-    let DEFAULTS = TrackFinder.constructor.DEFAULTS;
-    TrackFinder.setOptions(options);
+test('TrackFinder normalizePath should return a path by default', (t) => {
+    let tracker = new TrackFinder();
+    t.ok(tracker.normalizePath(), 'should return a path');
+    t.end();
+});
 
-    Object.keys(DEFAULTS).map((key)=>{
-        t.deepEquals(TrackFinder[key], DEFAULTS[key], `${key} should be equal`);
+test('TrackFinder should resolve non absolute paths', (t) => {
+    let tracker = new TrackFinder();
+    let expected = tracker.basepath + '/fixtures';
+    let normalized = tracker.normalizePath('./fixtures');
+    t.same(normalized, expected);
+    t.end();
+});
+
+test('TrackFinder should resolve use basepath to normalize paths', (t) => {
+    let tracker = new TrackFinder({
+        basepath: __dirname
     });
+
+    let expected = tracker.basepath + '/fixtures';
+    let normalized = tracker.normalizePath('./fixtures');
+    t.same(normalized, expected);
+    t.end();
+});
+
+test('TrackFinder should normalize an array of paths', (t) => {
+    let tracker = new TrackFinder({
+        basepath: __dirname
+    });
+
+    let expected = [
+        tracker.basepath + '/fixtures/route',
+        tracker.basepath + '/fixtures/routes'
+    ];
+
+    let normalized = tracker.normalizePath([
+        './fixtures/route',
+        './fixtures/routes'
+    ]);
+
+    t.same(normalized, expected);
+    t.end();
+});
+
+test('TrackFinder normalized path should exists', (t) => {
+    let tracker = new TrackFinder({
+        basepath: __dirname
+    });
+
+    let normalized = tracker.normalizePath('./fixtures');
+
+    t.ok(fs.existsSync(normalized));
     t.end();
 });
 
 test('TrackFinder addFileFilter should be stored in filters', (t)=>{
-    let test = function(){};
-    let expected = TrackFinder.filters.concat([test]);
-    TrackFinder.addFileFilter(test);
-    t.deepEquals(TrackFinder.filters, expected);
+    let tracker = new TrackFinder();
+    let expected = tracker.filters.concat([test]);
+    tracker.addFileFilter(test);
+    t.deepEquals(tracker.filters, expected);
     t.end();
 });
 
 test('TrackFinder filterFile should return true if a filter applies to ar filename', (t)=> {
-    //By default we ignore index.js files
-    t.ok(TrackFinder.filterFile('index.js'));
-    t.end();
-});
-
-test('TrackFinder should find route files in a directory', (t) => {
-    let files = TrackFinder.find(('./test/fixtures/routes'));
-    t.equals(files.length, 2, 'Should find files');
-    t.end();
-});
-
-test('TrackFinder should register route files in a directory', (t) => {
-    let app = {
-        use: function(){}
-    };
-
-    let routers = TrackFinder.register(app, {
-        path: './test/fixtures/routes',
-        config: {}
-    });
-
-    t.equals(routers.length, 2, 'Should return a router per route file');
+    let tracker = new TrackFinder();
+    t.ok(tracker.filterFile('index.js'));
     t.end();
 });
